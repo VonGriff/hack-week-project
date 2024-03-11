@@ -1,13 +1,18 @@
+import { GroupProps, GroupRange } from "./types";
 
 
-const Group = () => {
+const Group = ({details}: GroupProps) => {
+  const { complexityRange, currentSize, mechanisms, title, wantedSize, } = details;
+
+  const displayRange = ({from, to}: GroupRange) => to === from ? to : `${from} - ${to}`;
+
   return <>
-    <h2>Some title</h2>
+    <h2>{title}</h2>
     <ul>
-      <li>Looking for a group size of: NUM</li>
-      <li>Current group size: TWO</li>
-      <li>Complexity: PI</li>
-      <li>Mechanisms: LIST</li>
+      <li>Looking for a group size of: {displayRange(wantedSize)}</li>
+      <li>Current group size: {currentSize}</li>
+      <li>Complexity: {displayRange(complexityRange)}</li>
+      <li>Mechanisms: {mechanisms.map(m => m).join(', ')}</li>
     </ul>
     <button>Request to join</button>
   </>

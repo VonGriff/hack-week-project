@@ -1,4 +1,5 @@
 import { Filter, Group } from "..";
+import { groupData } from "../Group/mock-data";
 
 const Home = () => {
   return <>
@@ -7,7 +8,7 @@ const Home = () => {
       <Filter />
       <section>
         <ul>
-          <li><Group /></li>
+          <li><Group details={groupData}/></li>
         </ul>
       </section>
     </main>

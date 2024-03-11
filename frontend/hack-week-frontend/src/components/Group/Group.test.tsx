@@ -6,7 +6,7 @@ import { groupData } from './mock-data';
 
 describe('Test Group component', () => {
   it('Should render', () => {
-    render(<Group />);
+    render(<Group details={groupData}/>);
   })
 
   it('Should display heading from props', () => {
@@ -19,13 +19,13 @@ describe('Test Group component', () => {
   it('should display current and wanted group sizes', () => {
     render(<Group details={groupData}/>)
 
-    expect(screen.getByText('Current group size:')).toHaveTextContent('2');
-    expect(screen.getByText('Looking for a group size of:')).toHaveTextContent('4')
+    expect(screen.getByText(/Current group size:/)).toHaveTextContent('2');
+    expect(screen.getByText(/Looking for a group size of:/)).toHaveTextContent('4')
   })
 
   it('Should display current and wanted group size', () => {
     render(<Group details={groupData} />)
 
-    expect(screen.getByText('Mechanisms:')).toHaveTextContent('Worker Placement, Deckbuilding')
+    expect(screen.getByText(/Mechanisms:/)).toHaveTextContent('Worker Placement, Deckbuilding')
   })
 })
