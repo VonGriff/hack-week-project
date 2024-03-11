@@ -5,9 +5,11 @@ const Home = () => {
     <nav>Navigation</nav>
     <main>
       <Filter />
-      <ul>
-        <li><Group /></li>
-      </ul>
+      <section>
+        <ul>
+          <li><Group /></li>
+        </ul>
+      </section>
     </main>
   </>
 }
