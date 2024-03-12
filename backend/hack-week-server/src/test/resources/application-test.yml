@@ -1,0 +1,18 @@
+server:
+  port: 3001
+
+spring:
+  #sql:
+   # init:
+    #  mode: never
+     # platform: H2
+      #data-locations: classpath:data-test.sql
+      #schema-locations: classpath:schema-test.sql
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+  jpa:
+    defer-datasource-initialization: true
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop

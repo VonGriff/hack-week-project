@@ -1,1 +1,4 @@
-spring.application.name=hack-week-server
+#spring.application.name=hack-week-server
+
+server:
+  port: 3000

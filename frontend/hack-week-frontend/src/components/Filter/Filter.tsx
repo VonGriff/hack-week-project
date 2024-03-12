@@ -29,24 +29,24 @@ const Filter = () => {
     <form onSubmit={handleSubmit}>
       <div className="filter__mechanism-checkbox-container">
         <input type="checkbox" id="workerPlacement" name="worker-placement" value="WP" />
-        <label htmlFor="worker-placement">Worker Placement</label>
+        <label htmlFor="workerPlacement">Worker Placement</label>
         <input type="checkbox" id="deckbuilding" name="deckbuilding"/>
         <label htmlFor="deckbuilding">Deck Building</label>
         <input type="checkbox" id="engineBuilding" name="engine-building" />
-        <label htmlFor="engine-building">Engine Building</label>
+        <label htmlFor="engineBuilding">Engine Building</label>
       </div>
       <div className="filter__group-size">
         <p>Group size (2-30)</p>
-        <label htmlFor="group-size-from">From:</label>
+        <label htmlFor="groupSizeFrom">From:</label>
         <input type="text" id="groupSizeFrom" name="group-size-from" />
-        <label htmlFor="group-size-to">To:</label>
+        <label htmlFor="groupSizeTo">To:</label>
         <input type="text" id="groupSizeTo" name="group-size-to"/>
       </div>
       <div className="filter__complexity">
         <p>Complexity (1-5)</p>
-        <label htmlFor="complexity-from">From:</label>
+        <label htmlFor="complexityFrom">From:</label>
         <input type="text" id="complexityFrom" name="complexity-from" />
-        <label htmlFor="complexity-to">To:</label>
+        <label htmlFor="complexityTo">To:</label>
         <input type="text" id="complexityTo" name="complexity-to"/>
       </div>
       <button type="submit">Search</button>

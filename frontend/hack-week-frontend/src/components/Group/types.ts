@@ -1,9 +1,10 @@
 export type GroupType = {
+  id: number;
   title: string;
   wantedSize: GroupRange;
   currentSize: number;
   complexityRange: GroupRange;
-  mechanisms: string[];
+  mechanisms: Mechanism[];
 }
 
 export type GroupProps = {
@@ -14,3 +15,8 @@ export type GroupRange = {
   from: number;
   to:  number;
 }
+
+export type Mechanism = 
+  'Deckbuilding' |
+  'Engine Building' |
+  'Worker Placement';
