@@ -18,9 +18,9 @@ public class GroupsController {
     }
 
     @GetMapping
-    public ResponseEntity<Group> getAll() {
+    public ResponseEntity<GroupDTO> getAll() {
         var group = service.getGroup();
-        return ResponseEntity.ok(group);
+        return ResponseEntity.ok(GroupDTO.groupToDto(group));
     }
 
     @PostMapping

@@ -12,18 +12,24 @@ public class Group {
     //@Id
     //@GeneratedValue(strategy = GenerationType.UUID)
     private long id;
+    private String title;
     private int groupSize;
-    private int wantedGroupSize;
-    private double complexity;
+    private int lowLimitGroupSize;
+    private int upperLimitGroupSize;
+    private double lowLimitComplexity;
+    private double upperLimitComplexity;
     private String[] mechanisms;
 
     public Group() {}
 
-    public Group(long id, int groupSize, int wantedGroupSize, double complexity, String[] mechanisms) {
+    public Group(long id, String title, int groupSize, int lowLimitGroupSize, int upperLimitGroupSize, double lowLimitComplexity, double upperLimitComplexity, String[] mechanisms) {
         this.id = id;
+        this.title = title;
         this.groupSize = groupSize;
-        this.wantedGroupSize = wantedGroupSize;
-        this.complexity = complexity;
+        this.lowLimitGroupSize = lowLimitGroupSize;
+        this.upperLimitGroupSize = upperLimitGroupSize;
+        this.lowLimitComplexity = lowLimitComplexity;
+        this.upperLimitComplexity = upperLimitComplexity;
         this.mechanisms = mechanisms;
     }
 
@@ -31,16 +37,28 @@ public class Group {
         return id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public int getGroupSize() {
         return groupSize;
     }
 
-    public int getWantedGroupSize() {
-        return wantedGroupSize;
+    public int getLowLimitGroupSize() {
+        return lowLimitGroupSize;
     }
 
-    public double getComplexity() {
-        return complexity;
+    public int getUpperLimitGroupSize() {
+        return upperLimitGroupSize;
+    }
+
+    public double getLowLimitComplexity() {
+        return lowLimitComplexity;
+    }
+
+    public double getUpperLimitComplexity() {
+        return upperLimitComplexity;
     }
 
     public String[] getMechanisms() {
