@@ -1,18 +1,19 @@
 package org.salt.hackweekserver.model;
 
-/*import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;*/
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
-//@Entity
+@Entity
+@Table(name = "groups")
 public class Group {
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.UUID)
+    @Id
+    @Column(name = "group_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(name = "group_title")
     private String title;
+    @Column(name = "group_size")
     private int groupSize;
     private int lowLimitGroupSize;
     private int upperLimitGroupSize;
@@ -22,8 +23,7 @@ public class Group {
 
     public Group() {}
 
-    public Group(long id, String title, int groupSize, int lowLimitGroupSize, int upperLimitGroupSize, double lowLimitComplexity, double upperLimitComplexity, String[] mechanisms) {
-        this.id = id;
+    public Group(String title, int groupSize, int lowLimitGroupSize, int upperLimitGroupSize, double lowLimitComplexity, double upperLimitComplexity, String[] mechanisms) {
         this.title = title;
         this.groupSize = groupSize;
         this.lowLimitGroupSize = lowLimitGroupSize;

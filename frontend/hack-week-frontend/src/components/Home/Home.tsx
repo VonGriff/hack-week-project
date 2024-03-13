@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import { Filter, Group } from "..";
-import { mockedGroupData } from "../Group/mock-data";
 import { GroupType } from "../Group/types";
+import { getGroup } from '../../api';
 
 const Home = () => {
   const [groups, setGroups] = useState<GroupType[]>([]);
-
+  
   useEffect(() => {
     getGroups();
   }, []);
-
+  
   const getGroups = async () => {
-    setGroups([mockedGroupData]);
+    const data = await getGroup();
+    setGroups(data);
   }
 
   return <>
@@ -19,11 +20,11 @@ const Home = () => {
     <main>
       <Filter />
       <section>
-        {groups ? 
+        {groups.length > 0 ? 
           <ul>
             {groups.map(group => <li key={group.id}><Group details={group}/></li>)}
           </ul>
-        : <p>No groups found</p>}
+        : <p>No groups found :(</p>}
       </section>
     </main>
   </>
