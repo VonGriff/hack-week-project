@@ -2,7 +2,7 @@ package org.salt.hackweekserver.model;
 
 import jakarta.persistence.*;
 
-import java.util.UUID;
+import java.util.List;
 
 @Entity
 @Table(name = "groups")
@@ -15,15 +15,20 @@ public class Group {
     private String title;
     @Column(name = "group_size")
     private int groupSize;
+    @Column(name = "group_size_lower_limit")
     private int lowLimitGroupSize;
+    @Column(name = "group_size_upper_limit")
     private int upperLimitGroupSize;
+    @Column(name = "complexity_lower_limit")
     private double lowLimitComplexity;
+    @Column(name = "complexity_upper_limit")
     private double upperLimitComplexity;
-    private String[] mechanisms;
+    @Column(name = "mechanisms")
+    private String mechanisms;
 
     public Group() {}
 
-    public Group(String title, int groupSize, int lowLimitGroupSize, int upperLimitGroupSize, double lowLimitComplexity, double upperLimitComplexity, String[] mechanisms) {
+    public Group(String title, int groupSize, int lowLimitGroupSize, int upperLimitGroupSize, double lowLimitComplexity, double upperLimitComplexity, String mechanisms) {
         this.title = title;
         this.groupSize = groupSize;
         this.lowLimitGroupSize = lowLimitGroupSize;
@@ -62,6 +67,6 @@ public class Group {
     }
 
     public String[] getMechanisms() {
-        return mechanisms;
+        return mechanisms.split(", ");
     }
 }

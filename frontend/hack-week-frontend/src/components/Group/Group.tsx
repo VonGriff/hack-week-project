@@ -12,7 +12,7 @@ const Group = ({ details }: GroupProps) => {
       <li>Looking for a group size of: { displayRange(wantedSize) }</li>
       <li>Current group size: { currentSize }</li>
       <li>Complexity: { displayRange(complexityRange) }</li>
-      <li>Mechanisms: { mechanisms.map(m => m).join(', ') }</li>
+      <li>Mechanisms: { mechanisms && mechanisms.map(m => m).join(', ') }</li>
     </ul>
     <button>Request to join</button>
   </>

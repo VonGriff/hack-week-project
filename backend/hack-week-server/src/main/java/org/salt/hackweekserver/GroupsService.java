@@ -16,8 +16,7 @@ public class GroupsService {
     }
 
     public Group getGroup() {
-        String[] mechanisms = new String[]{"Deckbuilding, Worker Placement"};
-        Group group = new Group("Looking For Boardgame Group Members!",2,3,5,2.4,3.5, mechanisms);
+        Group group = new Group("Looking For Boardgame Group Members!",2,3,5,2.4,3.5, "Deckbuilding, Worker Placement");
         return repo.save(group);
     }
 
