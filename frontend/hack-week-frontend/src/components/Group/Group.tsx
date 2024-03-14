@@ -11,12 +11,12 @@ const Group = ({ details }: GroupProps) => {
   return <>
     <h2>{title}</h2>
     <ul>
-      <li>Looking for a group size of: { displayRange(wantedSize) }</li>
-      <li>Current group size: { currentSize }</li>
-      <li>Complexity: { displayRange(complexityRange) }</li>
-      <li>Mechanisms: { mechanisms && mechanisms.map(m => m).join(', ') }</li>
+      <li><p>Looking for a group size of: <strong>{ displayRange(wantedSize) }</strong></p></li>
+      <li><p>Current group size: <strong>{ currentSize }</strong></p></li>
+      <li><p>Complexity: <strong>{ displayRange(complexityRange) }</strong></p></li>
+      <li><p>Mechanisms: <strong>{ mechanisms && mechanisms.map(m => m).join(', ') }</strong></p></li>
     </ul>
-    {isClicked ? <p>Request sent!</p> :<button onClick={() => setIsClicked(true)}>Request to join</button>}
+    {isClicked ? <button>Sent!</button> :<button onClick={() => setIsClicked(true)}>Request to join</button>}
   </>
 }
 

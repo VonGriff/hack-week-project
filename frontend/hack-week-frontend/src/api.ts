@@ -33,13 +33,14 @@ export const getFiltered = async (filter: FilterType) => {
 
 export const postGroup = async (group: AddGroupType) => {
   try {
-    fetch(baseUrl, {
+    await fetch(baseUrl, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
       },
       body: JSON.stringify(group)
     })
+
   } catch(e: unknown) {
     console.log(e);
   }

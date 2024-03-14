@@ -5,6 +5,7 @@ import { getAllGroups, getFiltered, postGroup } from '../../api';
 import { FilterType } from "../Filter/types";
 import { AddGroupType } from "../AddForm/types";
 import AddForm from "../AddForm/AddForm";
+import './Home.css'
 
 const Home = () => {
   const [groups, setGroups] = useState<GroupType[]>([]);
@@ -19,6 +20,7 @@ const Home = () => {
   }
 
   const getFilteredGroups = async (filter: FilterType) => {
+    console.log("filter send:", filter)
     const data = await getFiltered(filter);
     data && setGroups(data);
   }
@@ -29,17 +31,23 @@ const Home = () => {
   }
 
   return <>
-    <nav>Navigation</nav>
+    <header className="bg-midnight fixed top-0 left-0 right-0 z-10">
+      <nav className="nav"><h2>Looking For Boardgame Group</h2></nav>
+    </header>
     <main>
-      <Filter setFilter={getFilteredGroups}/>
-      <section>
+      <section className="container">
+        <Filter setFilter={getFilteredGroups}/>
+      </section>
+      <section className="container">
         {groups.length > 0 ? 
           <ul>
-            {groups.map(group => <li key={group.id}><Group details={group}/></li>)}
+            {groups.map(group => <li key={group.id} className="card"><Group details={group}/></li>)}
           </ul>
         : <p>No groups found :(</p>}
       </section>
-      <AddForm addGroup={addGroup}/>
+      <section className="container">
+        <AddForm addGroup={addGroup}/>
+      </section>
     </main>
   </>
 }

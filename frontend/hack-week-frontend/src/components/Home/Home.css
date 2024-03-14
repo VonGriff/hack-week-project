@@ -1,0 +1,13 @@
+header {
+  position: fixed;
+  background-color: darkgrey;
+  height: 40px;
+}
+
+main {
+  margin-top: 25px;
+}
+
+nav {
+  width: 100%;
+}

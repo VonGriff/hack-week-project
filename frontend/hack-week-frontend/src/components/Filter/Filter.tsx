@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { CheckboxOption, FilterProps, FilterType, GroupFormEvent } from "./types";
+import './Filter.css'
 
 export const checkboxOptions: CheckboxOption[] = [
   {
@@ -40,12 +41,9 @@ const Filter = ({ setFilter }: FilterProps) => {
   }
 
   const handleSubmit = (event: GroupFormEvent) => {
-    // checkboxes
-    //const { deckbuilding, engineBuilding, workerPlacement } = event.target;
-    // range values
     const { complexityFrom, complexityTo, groupSizeFrom, groupSizeTo } = event.target;
     event.preventDefault();
-
+    console.log
     if (!(isValidRange(complexityFrom.value, complexityTo.value, 1, 5) && isValidRange(groupSizeFrom.value, groupSizeTo.value, 2, 30))) {
       setShowError(true);
       return;
@@ -57,35 +55,35 @@ const Filter = ({ setFilter }: FilterProps) => {
     const complexityRange = { from: complexityFrom.value, to: complexityTo.value };
 
     const filtered: FilterType = {mechanisms, groupSize: sizeRange, complexity: complexityRange }
-    console.log(filtered);
     setFilter(filtered);
   }
 
   return <>
-    <form onSubmit={handleSubmit}>
+  <h2>Filter</h2>
+    <form className="flex items-center" onSubmit={handleSubmit}>
       <div className="filter__mechanism-checkbox-container">
         {mechanismOptions.map(opt => (
           <span key={opt.key}>
-            <input type="checkbox" onChange={handleCheckboxChange} id={opt.id} name={opt.id} value={opt.value} />
+            <input className="filter__checkbox" type="checkbox" onChange={handleCheckboxChange} id={opt.id} name={opt.id} value={opt.value} />
             <label htmlFor={opt.id}>{opt.value}</label>
           </span>
         ))}
       </div>
       <div className="filter__group-size">
         <p>Group size (2-30)</p>
-        <label htmlFor="groupSizeFrom">From:</label>
-        <input type="text" id="groupSizeFrom" name="group-size-from" />
-        <label htmlFor="groupSizeTo">To:</label>
-        <input type="text" id="groupSizeTo" name="group-size-to"/>
+          <label htmlFor="groupSizeFrom">From:</label>
+          <input className="filter__text" type="text" id="groupSizeFrom" name="group-size-from" />
+          <label htmlFor="groupSizeTo">To:</label>
+          <input className="filter__text" type="text" id="groupSizeTo" name="group-size-to"/>
       </div>
       <div className="filter__complexity">
         <p>Complexity (1-5)</p>
         <label htmlFor="complexityFrom">From:</label>
-        <input type="text" id="complexityFrom" name="complexity-from" />
+        <input className="filter__text" type="text" id="complexityFrom" name="complexity-from" />
         <label htmlFor="complexityTo">To:</label>
-        <input type="text" id="complexityTo" name="complexity-to"/>
+        <input className="filter__text" type="text" id="complexityTo" name="complexity-to"/>
       </div>
-      <button type="submit">Search</button>
+      <button type="submit">Find Groups</button>
     </form>
     {showError && <p>Oh no, a placeholder error occurred!</p>}
   </>
