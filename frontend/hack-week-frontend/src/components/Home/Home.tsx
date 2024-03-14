@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { Filter, Group } from "..";
 import { GroupType } from "../Group/types";
-import { getAllGroups, getFiltered } from '../../api';
+import { getAllGroups, getFiltered, postGroup } from '../../api';
 import { FilterType } from "../Filter/types";
+import { AddGroupType } from "../AddForm/types";
+import AddForm from "../AddForm/AddForm";
 
 const Home = () => {
   const [groups, setGroups] = useState<GroupType[]>([]);
@@ -21,6 +23,11 @@ const Home = () => {
     data && setGroups(data);
   }
 
+  const addGroup = async (group: AddGroupType) => {
+    await postGroup(group);
+    getGroups();
+  }
+
   return <>
     <nav>Navigation</nav>
     <main>
@@ -32,6 +39,7 @@ const Home = () => {
           </ul>
         : <p>No groups found :(</p>}
       </section>
+      <AddForm addGroup={addGroup}/>
     </main>
   </>
 }

@@ -1,31 +1,32 @@
-import { ChangeEvent, useState } from "react";
-import { CheckboxOption, FilterProps, FilterType, GroupFormEvent } from "./types";
+import { checkboxOptions } from "../Filter/Filter"
+import { ChangeEvent, useState } from "react"
+import { AddFormType, AddGroupType } from "./types"
 
-export const checkboxOptions: CheckboxOption[] = [
-  {
-    key: 1,
-    id: "deckbuilding",
-    value: 'Deckbuilding',
-    checked: false,
-  }, {
-    key: 2,
-    id: "engineBuilding",
-    value: "Engine Building",
-    checked: false,
-  }, {
-    key: 3,
-    id: "workerPlacement",
-    value: "Worker Placement",
-    checked: false,
-  }
-]
-
-const Filter = ({ setFilter }: FilterProps) => {
+const AddForm = ({addGroup}: {addGroup: (group: AddGroupType) => void}) => {
+  const [mechanismOptions, setMechanismOptions] = useState(checkboxOptions)
   const [showError, setShowError] = useState(false);
-  const [mechanismOptions, setMechanismOptions] = useState(checkboxOptions);
 
   const isValidRange = (from: number, to: number, lowerLimit: number, upperLimit: number) => {
     return from <= to && from >= lowerLimit && to <= upperLimit;
+  }
+
+  const handleSubmit = (event: AddFormType) => {
+    const { title, complexityFrom, complexityTo, groupSizeFrom, groupSizeTo } = event.target;
+    event.preventDefault();
+
+    if (!(isValidRange(complexityFrom.value, complexityTo.value, 1, 5) && isValidRange(groupSizeFrom.value, groupSizeTo.value, 2, 30))) {
+      setShowError(true);
+      return;
+    }
+    setShowError(false);
+
+    const mechanisms = mechanismOptions.filter(m => m.checked).map(m => m.value).join(', ');
+    const sizeRange = { from: groupSizeFrom.value, to: groupSizeTo.value };
+    const complexityRange = { from: complexityFrom.value, to: complexityTo.value };
+
+    const filtered: AddGroupType = {title: title.value, mechanisms, groupSize: sizeRange, complexity: complexityRange }
+    console.log(filtered);
+    addGroup(filtered);
   }
 
   const handleCheckboxChange = (event: ChangeEvent) => {
@@ -39,30 +40,10 @@ const Filter = ({ setFilter }: FilterProps) => {
     setMechanismOptions(newOptions)
   }
 
-  const handleSubmit = (event: GroupFormEvent) => {
-    // checkboxes
-    //const { deckbuilding, engineBuilding, workerPlacement } = event.target;
-    // range values
-    const { complexityFrom, complexityTo, groupSizeFrom, groupSizeTo } = event.target;
-    event.preventDefault();
-
-    if (!(isValidRange(complexityFrom.value, complexityTo.value, 1, 5) && isValidRange(groupSizeFrom.value, groupSizeTo.value, 2, 30))) {
-      setShowError(true);
-      return;
-    }
-    setShowError(false);
-
-    const mechanisms = mechanismOptions.filter(m => m.checked).map(m => m.value).join(', ');
-    const sizeRange = { from: groupSizeFrom.value, to: groupSizeTo.value };
-    const complexityRange = { from: complexityFrom.value, to: complexityTo.value };
-
-    const filtered: FilterType = {mechanisms, groupSize: sizeRange, complexity: complexityRange }
-    console.log(filtered);
-    setFilter(filtered);
-  }
-
   return <>
     <form onSubmit={handleSubmit}>
+      <label htmlFor="title">Title</label>
+      <input type="text" id="title" name="title"/>
       <div className="filter__mechanism-checkbox-container">
         {mechanismOptions.map(opt => (
           <span key={opt.key}>
@@ -87,8 +68,8 @@ const Filter = ({ setFilter }: FilterProps) => {
       </div>
       <button type="submit">Search</button>
     </form>
-    {showError && <p>Oh no, a placeholder error occurred!</p>}
+    {showError && <p>Oops</p>}
   </>
 }
 
-export default Filter;
+export default AddForm;

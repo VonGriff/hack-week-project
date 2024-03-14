@@ -1,3 +1,4 @@
+import { AddGroupType } from "./components/AddForm/types";
 import { FilterType } from "./components/Filter/types";
 import { GroupType } from "./components/Group/types";
 
@@ -27,5 +28,19 @@ export const getFiltered = async (filter: FilterType) => {
   } catch (e: unknown) {
     console.log(e);
     return;
+  }
+}
+
+export const postGroup = async (group: AddGroupType) => {
+  try {
+    fetch(baseUrl, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(group)
+    })
+  } catch(e: unknown) {
+    console.log(e);
   }
 }
