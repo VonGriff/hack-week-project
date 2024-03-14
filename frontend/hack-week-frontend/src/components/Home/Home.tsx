@@ -31,9 +31,9 @@ const Home = () => {
   }
 
   return <>
-    <header className="bg-midnight fixed top-0 left-0 right-0 z-10">
+    {/* <header className="fixed top-0 left-0 right-0 z-10">
       <nav className="nav"><h2>Looking For Boardgame Group</h2></nav>
-    </header>
+    </header> */}
     <main>
       <section className="container">
         <Filter setFilter={getFilteredGroups}/>

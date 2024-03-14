@@ -45,12 +45,15 @@ public class GroupsService {
                 .toList();
     }
 
+    public Profile getProfile() {
+        return profileRepo.findById(1L).orElse(null);
+    }
+
     private boolean hasMechanisms(String toSearch, String mechanisms) {
         if (mechanisms.isEmpty()) {
             return true;
         }
         String[] search = toSearch.split(", ");
-
         String[] mechArray = mechanisms.split((", "));
 
         for (String s: mechArray) {
