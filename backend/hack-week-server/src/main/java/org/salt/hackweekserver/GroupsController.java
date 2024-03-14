@@ -43,4 +43,10 @@ public class GroupsController {
         Profile profile = service.getProfile();
         return ResponseEntity.ok(profile);
     }
+
+    @PostMapping("/profile/{id}")
+    public ResponseEntity<GroupDTO> addToUser(@PathVariable long id) {
+        Group group = service.addToGroup(id);
+        return ResponseEntity.ok(GroupDTO.groupToDto(group));
+    }
 }

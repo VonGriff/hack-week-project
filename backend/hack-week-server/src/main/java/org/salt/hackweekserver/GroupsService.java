@@ -49,6 +49,16 @@ public class GroupsService {
         return profileRepo.findById(1L).orElse(null);
     }
 
+    public Group addToGroup(long id) {
+        Group group = repo.findById(id).orElse(null);
+        Profile profile = profileRepo.findById(1L).orElse(null);
+        if (group == null || profile == null) {
+            return null;
+        }
+        group.addProfile(profile);
+        return repo.save(group);
+    }
+
     private boolean hasMechanisms(String toSearch, String mechanisms) {
         if (mechanisms.isEmpty()) {
             return true;

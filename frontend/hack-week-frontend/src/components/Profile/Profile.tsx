@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { GroupType } from "../Group/types";
 
 type UserType = {
   firstName: string;
   lastName: string;
-  preferences: string
+  preferences: string;
+  groups: GroupType[];
 }
 
 
@@ -21,10 +23,16 @@ const Profile = () => {
 
   return <>
   {user &&
-    <ul>
-      <li>Name: <strong>{user.firstName} {user.lastName}</strong></li>
-      <li>Preferred mechanisms: <strong>{user.preferences}</strong></li>
-    </ul>}
+    <div data-theme="luxury" className="p-3 rounded-xl">
+      <ul>
+        <li>Name: <strong>{user.firstName} {user.lastName}</strong></li>
+        <li>Preferred mechanisms: <strong>{user.preferences}</strong></li>
+      </ul>
+      <p>Waiting for reply from groups:</p>
+      <ul>
+        {user?.groups && user.groups.map(g => <li key={g.id}>{g.title}</li>)}
+      </ul>
+    </div>}
   </>
 }
 

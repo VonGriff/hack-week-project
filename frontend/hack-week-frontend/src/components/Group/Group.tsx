@@ -1,10 +1,16 @@
 import { useState } from "react";
 import { GroupProps, GroupRange } from "./types";
+import { addGroupToUser } from "../../api";
 
 
 const Group = ({ details }: GroupProps) => {
-  const { complexityRange, currentSize, mechanisms, title, wantedSize, } = details;
+  const { id, complexityRange, currentSize, mechanisms, title, wantedSize, } = details;
   const [isClicked, setIsClicked] = useState(false);
+
+  const addToGroup = async () => {
+    await addGroupToUser(id);
+    setIsClicked(true);
+  }
 
   const displayRange = ({from, to}: GroupRange) => to === from ? to : `${from} - ${to}`;
 
@@ -16,7 +22,8 @@ const Group = ({ details }: GroupProps) => {
       <li><p>Complexity: <strong>{ displayRange(complexityRange) }</strong></p></li>
       <li><p>Mechanisms: <strong>{ mechanisms && mechanisms.map(m => m).join(', ') }</strong></p></li>
     </ul>
-    {isClicked ? <button className="my-3">Sent!</button> :<button onClick={() => setIsClicked(true)} className="my-3">Request to join</button>}
+    
+    {isClicked ? <button className="my-3">Sent!</button> :<button onClick={addToGroup} className="my-3">Request to join</button>}
   </div>
 }
 

@@ -2,10 +2,12 @@ import { AddGroupType } from "./components/AddForm/types";
 import { FilterType } from "./components/Filter/types";
 import { GroupType } from "./components/Group/types";
 
-const baseUrl = 'http://localhost:3000/api/groups';
+const baseUrl = 'http://localhost:3000/api';
+const groupUrl = baseUrl + '/groups';
+const profileUrl = baseUrl + '/profile';
 
 export const getAllGroups = async () => {
-  const response = await fetch(baseUrl);
+  const response = await fetch(groupUrl);
 
   const result: GroupType[] = await response.json();
   console.log(result);
@@ -15,7 +17,7 @@ export const getAllGroups = async () => {
 export const getFiltered = async (filter: FilterType) => {
   console.log("filter to be posted:", filter);
   try {
-    const response = await fetch(`${baseUrl}/filter`, {
+    const response = await fetch(`${groupUrl}/filter`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -33,7 +35,7 @@ export const getFiltered = async (filter: FilterType) => {
 
 export const postGroup = async (group: AddGroupType) => {
   try {
-    await fetch(baseUrl, {
+    await fetch(groupUrl, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -44,4 +46,15 @@ export const postGroup = async (group: AddGroupType) => {
   } catch(e: unknown) {
     console.log(e);
   }
+}
+
+export const addGroupToUser = async (id: number) => {
+  const response = await fetch(`${profileUrl}/${id}`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+    }
+  });
+  const data = await response.json();
+  console.log(data);
 }
