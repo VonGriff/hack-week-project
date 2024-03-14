@@ -58,7 +58,7 @@ const Filter = ({ setFilter }: FilterProps) => {
 
     const filtered: FilterType = {mechanisms, groupSize: sizeRange, complexity: complexityRange }
     console.log(filtered);
-    // setFilter(filtered);
+    setFilter(filtered);
   }
 
   return <>

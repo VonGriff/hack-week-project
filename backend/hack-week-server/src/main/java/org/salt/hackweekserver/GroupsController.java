@@ -23,8 +23,15 @@ public class GroupsController {
         return ResponseEntity.ok(GroupDTO.listToGroupDto(group));
     }
 
+    @PostMapping("/filter")
+    public ResponseEntity<List<GroupDTO>> getFiltered(@RequestBody GroupFilterDTO dto) {
+        List<Group> group = service.getFilteredGroups(dto.mechanisms(), dto.groupSize(), dto.complexity());
+        return ResponseEntity.ok(GroupDTO.listToGroupDto(group));
+    }
+
     @PostMapping
     public ResponseEntity<Void> addGroup() {
+
         return ResponseEntity.noContent().build();
     }
 }

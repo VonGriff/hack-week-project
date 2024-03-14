@@ -1,7 +1,7 @@
 import { GroupRange } from "../Group/types";
 
 export type FilterProps = {
-  setFilter: () => void;
+  setFilter: (filter: FilterType) => void;
 }
 
 export type GroupFormEvent = React.FormEvent<HTMLFormElement> & {

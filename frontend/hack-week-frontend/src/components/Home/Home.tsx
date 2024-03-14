@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Filter, Group } from "..";
 import { GroupType } from "../Group/types";
-import { getGroup } from '../../api';
+import { getAllGroups, getFiltered } from '../../api';
+import { FilterType } from "../Filter/types";
 
 const Home = () => {
   const [groups, setGroups] = useState<GroupType[]>([]);
@@ -11,14 +12,19 @@ const Home = () => {
   }, []);
   
   const getGroups = async () => {
-    const data = await getGroup();
+    const data = await getAllGroups();
     setGroups(data);
+  }
+
+  const getFilteredGroups = async (filter: FilterType) => {
+    const data = await getFiltered(filter);
+    data && setGroups(data);
   }
 
   return <>
     <nav>Navigation</nav>
     <main>
-      <Filter />
+      <Filter setFilter={getFilteredGroups}/>
       <section>
         {groups.length > 0 ? 
           <ul>
