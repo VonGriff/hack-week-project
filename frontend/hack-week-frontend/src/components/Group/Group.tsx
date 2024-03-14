@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { GroupProps, GroupRange } from "./types";
 
 
 const Group = ({ details }: GroupProps) => {
   const { complexityRange, currentSize, mechanisms, title, wantedSize, } = details;
+  const [isClicked, setIsClicked] = useState(false);
 
   const displayRange = ({from, to}: GroupRange) => to === from ? to : `${from} - ${to}`;
 
@@ -14,7 +16,7 @@ const Group = ({ details }: GroupProps) => {
       <li>Complexity: { displayRange(complexityRange) }</li>
       <li>Mechanisms: { mechanisms && mechanisms.map(m => m).join(', ') }</li>
     </ul>
-    <button>Request to join</button>
+    {isClicked ? <p>Request sent!</p> :<button onClick={() => setIsClicked(true)}>Request to join</button>}
   </>
 }
 

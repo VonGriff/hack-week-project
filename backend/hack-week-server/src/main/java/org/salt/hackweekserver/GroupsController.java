@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin("http://localhost:5173")
+@CrossOrigin
 @RestController
 @RequestMapping("/api/groups")
 public class GroupsController {
@@ -19,7 +19,7 @@ public class GroupsController {
 
     @GetMapping
     public ResponseEntity<List<GroupDTO>> getAll() {
-        var group = service.getAllGroups();
+        List<Group> group = service.getAllGroups();
         return ResponseEntity.ok(GroupDTO.listToGroupDto(group));
     }
 
