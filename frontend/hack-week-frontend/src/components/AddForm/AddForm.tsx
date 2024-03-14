@@ -14,20 +14,21 @@ const AddForm = ({addGroup}: {addGroup: (group: AddGroupType) => void}) => {
   const handleSubmit = (event: AddFormType) => {
     const { title, complexityFrom, complexityTo, groupSizeFrom, groupSizeTo } = event.target;
     event.preventDefault();
-
+    
     if (!(isValidRange(complexityFrom.value, complexityTo.value, 1, 5) && isValidRange(groupSizeFrom.value, groupSizeTo.value, 2, 30))) {
       setShowError(true);
       return;
     }
     setShowError(false);
-
+    
     const mechanisms = mechanismOptions.filter(m => m.checked).map(m => m.value).join(', ');
     const sizeRange = { from: groupSizeFrom.value, to: groupSizeTo.value };
     const complexityRange = { from: complexityFrom.value, to: complexityTo.value };
-
+    
     const filtered: AddGroupType = {title: title.value, mechanisms, groupSize: sizeRange, complexity: complexityRange }
     console.log(filtered);
     addGroup(filtered);
+    event.currentTarget.reset();
   }
 
   const handleCheckboxChange = (event: ChangeEvent) => {
@@ -42,6 +43,7 @@ const AddForm = ({addGroup}: {addGroup: (group: AddGroupType) => void}) => {
   }
 
   return <div data-theme="luxury" className="rounded-xl p-2">
+    <h2>Add new group</h2>
     <form className="flex items-center"onSubmit={handleSubmit}>
       <label htmlFor="title">Title</label>
       <input type="text" id="title" name="title"/>
