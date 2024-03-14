@@ -13,7 +13,7 @@ public record GroupDTO(long id, String title, int currentSize, GroupRange wanted
                 group.getGroupSize(),
                 new GroupRange(group.getLowLimitGroupSize(), group.getUpperLimitGroupSize()),
                 new GroupRange(group.getLowLimitComplexity(), group.getUpperLimitComplexity()),
-                group.getMechanisms());
+                group.getMechanisms().split(", "));
     }
 
     public static List<GroupDTO> listToGroupDto(List<Group> groupList) {

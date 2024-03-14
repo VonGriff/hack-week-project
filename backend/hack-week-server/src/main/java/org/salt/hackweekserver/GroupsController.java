@@ -4,6 +4,7 @@ import org.salt.hackweekserver.model.Group;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @CrossOrigin
@@ -30,8 +31,9 @@ public class GroupsController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> addGroup() {
-
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<GroupDTO> addGroup(@RequestBody AddGroupDTO dto) {
+        Group group = service.addGroup(dto.title(), dto.mechanisms(), dto.groupSize(), dto.complexity());
+        URI location = URI.create("1234");
+        return ResponseEntity.created(location).body(GroupDTO.groupToDto(group));
     }
 }

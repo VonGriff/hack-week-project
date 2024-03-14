@@ -2,13 +2,13 @@ package org.salt.hackweekserver.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "groups")
 public class Group {
     @Id
-    @Column(name = "group_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "group_title")
@@ -25,8 +25,13 @@ public class Group {
     private double upperLimitComplexity;
     @Column(name = "mechanisms")
     private String mechanisms;
+    @ManyToMany
+    @Column(name = "profiles")
+    private List<Profile> profiles;
 
-    public Group() {}
+    public Group() {
+        profiles = new ArrayList<>();
+    }
 
     public Group(String title, int groupSize, int lowLimitGroupSize, int upperLimitGroupSize, double lowLimitComplexity, double upperLimitComplexity, String mechanisms) {
         this.title = title;
@@ -36,6 +41,7 @@ public class Group {
         this.lowLimitComplexity = lowLimitComplexity;
         this.upperLimitComplexity = upperLimitComplexity;
         this.mechanisms = mechanisms;
+        profiles = new ArrayList<>();
     }
 
     public long getId() {
@@ -66,7 +72,11 @@ public class Group {
         return upperLimitComplexity;
     }
 
-    public String[] getMechanisms() {
-        return mechanisms.split(", ");
+    public String getMechanisms() {
+        return mechanisms;
+    }
+
+    public void addProfile(Profile profile) {
+        this.profiles.add(profile);
     }
 }
