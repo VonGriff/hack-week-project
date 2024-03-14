@@ -41,7 +41,7 @@ const AddForm = ({addGroup}: {addGroup: (group: AddGroupType) => void}) => {
     setMechanismOptions(newOptions)
   }
 
-  return <>
+  return <div data-theme="luxury" className="rounded-xl p-2">
     <form className="flex items-center"onSubmit={handleSubmit}>
       <label htmlFor="title">Title</label>
       <input type="text" id="title" name="title"/>
@@ -70,7 +70,7 @@ const AddForm = ({addGroup}: {addGroup: (group: AddGroupType) => void}) => {
       <button type="submit">Add Group</button>
     </form>
     {showError && <p>Oops</p>}
-  </>
+  </div>
 }
 
 export default AddForm;

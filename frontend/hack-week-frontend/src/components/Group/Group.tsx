@@ -8,16 +8,16 @@ const Group = ({ details }: GroupProps) => {
 
   const displayRange = ({from, to}: GroupRange) => to === from ? to : `${from} - ${to}`;
 
-  return <>
+  return <div data-theme="luxury" className="rounded-xl p-4">
     <h2>{title}</h2>
-    <ul>
+    <ul className="space-y-2">
       <li><p>Looking for a group size of: <strong>{ displayRange(wantedSize) }</strong></p></li>
       <li><p>Current group size: <strong>{ currentSize }</strong></p></li>
       <li><p>Complexity: <strong>{ displayRange(complexityRange) }</strong></p></li>
       <li><p>Mechanisms: <strong>{ mechanisms && mechanisms.map(m => m).join(', ') }</strong></p></li>
     </ul>
-    {isClicked ? <button>Sent!</button> :<button onClick={() => setIsClicked(true)}>Request to join</button>}
-  </>
+    {isClicked ? <button className="my-3">Sent!</button> :<button onClick={() => setIsClicked(true)} className="my-3">Request to join</button>}
+  </div>
 }
 
 export default Group;

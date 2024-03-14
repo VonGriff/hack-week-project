@@ -43,7 +43,7 @@ const Filter = ({ setFilter }: FilterProps) => {
   const handleSubmit = (event: GroupFormEvent) => {
     const { complexityFrom, complexityTo, groupSizeFrom, groupSizeTo } = event.target;
     event.preventDefault();
-    console.log
+
     if (!(isValidRange(complexityFrom.value, complexityTo.value, 1, 5) && isValidRange(groupSizeFrom.value, groupSizeTo.value, 2, 30))) {
       setShowError(true);
       return;
@@ -58,7 +58,7 @@ const Filter = ({ setFilter }: FilterProps) => {
     setFilter(filtered);
   }
 
-  return <>
+  return <div data-theme="luxury" className="rounded-xl">
   <h2>Filter</h2>
     <form className="flex items-center" onSubmit={handleSubmit}>
       <div className="filter__mechanism-checkbox-container">
@@ -85,8 +85,8 @@ const Filter = ({ setFilter }: FilterProps) => {
       </div>
       <button type="submit">Find Groups</button>
     </form>
-    {showError && <p>Oh no, a placeholder error occurred!</p>}
-  </>
+    {showError && <p>Oh no, an error occurred!</p>}
+  </div>
 }
 
 export default Filter;

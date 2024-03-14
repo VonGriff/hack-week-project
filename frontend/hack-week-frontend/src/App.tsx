@@ -1,16 +1,43 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import './App.css'
-import { Home, Profile } from './components'
+import { Home, Profile, Login } from './components'
+import { useEffect, useState } from 'react'
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [title, setTitle] = useState('');
 
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (pathname === "/home") {
+      setTitle("Home");
+    }
+    else if (pathname === "/profile") {
+      setTitle("Profile")
+    }
+    else {
+      setTitle('Looking For Boardgame Group')
+    }
+  }, [pathname])
+
+  const login = () => {
+    setIsLoggedIn(true)
+  }
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-10">
-        <nav className="nav"><h2>Looking For Boardgame Group</h2></nav>
+      <header data-theme="coffee" className="fixed top-0 left-0 right-0 z-10">
+        <nav className="grid">
+          <h2></h2>
+          <h2>{title}</h2>
+          {pathname !== "/" && <button onClick={() => navigate("/profile")} className='w-20 h-8 p-0 justify-self-end'>Profile</button>}
+        </nav>
       </header>
+      {isLoggedIn && <Navigate to='/home' replace={true} />}
       <Routes>
+        <Route path='/' element={<Login login={login}/>} />
         <Route path='/home' element={<Home />} />
         <Route path='/profile' element={<Profile />} />
       </Routes>
